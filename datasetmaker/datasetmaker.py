@@ -1,14 +1,7 @@
-import pandas as pd
+from pandas import read_csv
 
 
 class DatasetMaker:
-
-    def __init__(self, raw_path, processed_path):
-        self.raw_path = raw_path
-        self.processed_path = processed_path
-
-    def get_dataframe(self):
-        return read_dataframe(self.raw_path)
 
     def filter_dataframe(self, df):
         return df
@@ -22,20 +15,18 @@ class DatasetMaker:
     def organize_dataframe(self, df):
         return df
 
-    def make_processed_dataset(self):
-        (
-            self.get_dataframe()
-            .pipe(self.format_dataframe)
-            .pipe(self.filter_dataframe)
-            .pipe(self.transform_dataframe)
-            .pipe(self.organize_dataframe)
-            .to_csv(self.processed_path, index=False)
-        )
+    def make_dataset(self, df):
+        return (df
+                .pipe(self.format_dataframe)
+                .pipe(self.filter_dataframe)
+                .pipe(self.transform_dataframe)
+                .pipe(self.organize_dataframe)
+                )
 
 
 def read_dataframe(filepath):
     extension = str(filepath).split('.')[-1]
     if extension == 'tsv':
-        return pd.read_csv(filepath, sep='\t')
+        return read_csv(filepath, sep='\t')
     elif extension == 'csv':
-        return pd.read_csv(filepath, sep=',')
+        return read_csv(filepath, sep=',')

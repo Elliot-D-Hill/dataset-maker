@@ -6,5 +6,6 @@ setup(name='datasetmaker',
       url='#',
       author='Elliot Hill',
       author_email='',
+      install_requires=[],
       packages=find_packages(include=['datasetmaker']),
       zip_safe=False)
